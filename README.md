@@ -4,16 +4,17 @@
 
 * az group create --name ecomm-rg --location xxxx
 
-### Créationdes vnet et subnets (pour la segmatetion)
+### Création des vnet et subnets (pour la segmentation)
 * az network vnet create --resource-group ecomm-rg --name ecomm-vnet --address-prefixes 10.0.0.0/16 
 * az network vnet subnet create --resource-group ecomm-rg --vnet-name ecomm-vnet --name public-subnet --address-prefixes 10.0.1.0/24 
-* az network vnet subnet create --resource-group ecomm-rg --vnet-name ecomm-vnet --name vm-subnet --address-prefixes 10.0.2.0/24az network vnet subnet create --resource-group ecomm-rg --vnet-name ecomm-vnet --name db-subnet --address-prefixes 10.0.3.0/24
+* az network vnet subnet create --resource-group ecomm-rg --vnet-name ecomm-vnet --name vm-subnet --address-prefixes 10.0.2.0/24
+* az network vnet subnet create --resource-group ecomm-rg --vnet-name ecomm-vnet --name db-subnet --address-prefixes 10.0.3.0/24
 
 ### Création MySQL databases (encryption at rest)
 The following guides illustrate how to use some features concretely:
 
-* az mysql flexible-server create --resource-group ecomm-rg --name products-db --location eastus --admin-user dbuser --admin-password StrongPass123! --sku-name Standard_B1ms --tier Burstable --vnet ecomm-vnet --subnet db-subnet --version 8.0 
-* az mysql flexible-server create --resource-group ecomm-rg --name orders-db --location eastus --admin-user dbuser --admin-password StrongPass123! --sku-name Standard_B1ms --tier Burstable --vnet ecomm-vnet --subnet db-subnet --version 8.0
+* az mysql flexible-server create --resource-group ecomm-rg --name products-db --location xxx --admin-user dbuser --admin-password StrongPass123! --sku-name Standard_B1ms --tier Burstable --vnet ecomm-vnet --subnet db-subnet --version 8.0 
+* az mysql flexible-server create --resource-group ecomm-rg --name orders-db --location xxx --admin-user dbuser --admin-password StrongPass123! --sku-name Standard_B1ms --tier Burstable --vnet ecomm-vnet --subnet db-subnet --version 8.0
 
 ## Création VMs
 ### Products API VM
@@ -91,7 +92,7 @@ Restart Nginx:
 * sudo systemctl restart nginx
 * sudo systemctl enable nginx
 
-### fireall restriction
+### firewall restriction
 * az mysql flexible-server firewall-rule create --resource-group ecomm-rg --name products-db --rule-name allow-vms --start-ip-address 10.0.2.0 --end-ip-address 10.0.2.255
 * az mysql flexible-server firewall-rule create --resource-group ecomm-rg --name orders-db --rule-name allow-vms --start-ip-address 10.0.2.0 --end-ip-address 10.0.2.255
 
